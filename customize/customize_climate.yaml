@@ -1,0 +1,22 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#                   CLIMATE                        #
+#                                                  #
+####################################################
+
+climate.hk_bad:
+  friendly_name: Heizung Bad
+
+climate.hk_fenster:
+  friendly_name: Heizung Fenster
+
+climate.hk_balkon:
+  friendly_name: Heizung Balkon
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

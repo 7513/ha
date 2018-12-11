@@ -1,0 +1,28 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#                 AUTOMATIONS                      #
+#                                                  #
+####################################################
+
+automation.morning_briefing:
+  icon: mdi:weather-sunset
+  
+automation.turn_off_vacation_mode:
+  icon: mdi:beach
+
+automation.turn_on_vacation_mode:
+  icon: mdi:beach
+
+automation.jens_kommt_nach_hause:
+  icon: mdi:home-outline
+
+automation.ha_update_notification:
+  icon: mdi:autorenew
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

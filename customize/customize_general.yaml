@@ -1,0 +1,29 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#                 INPUT BOOLEANS                   #
+#                                                  #
+####################################################
+
+input_boolean.vacation:
+  friendly_name: Urlaubsmodus
+  icon: mdi:beach
+  
+
+####################################################
+#                                                  #
+#                 INPUT SELECTS                    #
+#                                                  #
+####################################################
+
+input_select.notification_bulb2_color:
+  friendly_name: Benachrichtigungslicht
+
+
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

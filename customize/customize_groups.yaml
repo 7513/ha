@@ -1,0 +1,68 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#                    GROUPS                        #
+#                                                  #
+####################################################
+
+group.location:
+  friendly_name: Standort
+  
+group.living_room:
+  friendly_name: Wohnzimmer
+  
+group.children_room:
+  friendly_name: Kinderzimmer
+
+group.bathroom:
+  friendly_name: Bad
+
+group.corridor:
+  friendly_name: Flur
+
+group.bedroom:
+  friendly_name: Schlafzimmer
+
+group.kitchen:
+  friendly_name: Küche
+  
+group.devices:
+  friendly_name: Geräte
+
+group.computer_shutdown__restart:
+  friendly_name: PC herunterfahren
+
+group.network_performance:
+  friendly_name: Netzwerkleistung
+
+group.ha_server_monitor:
+  friendly_name: HA Server Übersicht
+
+group.batteries:
+  friendly_name: Batterien
+
+group.vacation_mode_automations:
+  friendly_name: Urlaubsmodus Automationen
+
+group.home_assistant_automations:
+  friendly_name: HA Automationen
+
+group.device_tracker_automations:
+  friendly_name: Geräte Tracker Automationen
+
+group.other_automations:
+  friendly_name: Andere Automationen
+
+group.local_weather:
+  friendly_name: Wetter
+
+group.forecast4:
+  friendly_name: 4 Tage Vorhersage
+
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

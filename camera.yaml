@@ -1,0 +1,37 @@
+
+#https://home-assistant.io/components/camera/
+
+
+####################################################
+#                                                  #
+#                     CAMERA                       #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/camera
+  - platform: mjpeg
+    name: Zero Camera
+    mjpeg_url: !secret zerocam_url
+
+#  - platform: local_file
+#    name: Logitech Cam
+#    file_path: /share/motion/lastsnap.jpg
+
+
+####################################################
+#                                                  #
+#                 WEATHER RADAR                    #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/camera.generic/
+  - platform: generic
+    still_image_url: https://www.niederschlagsradar.de/image.ashx?type=regioloop&regio=han&j=&m=&d=&mi=&uhr=&bliksem=0&voor=&srt=loop1stunde
+    name: Niederschlagsradar
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -1,0 +1,173 @@
+
+#https://home-assistant.io/components/sensor/
+
+  - platform: yr
+
+
+####################################################
+#                                                  #
+#              HA SERVER METRICS                   #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_use_percent
+      - type: processor_use
+      - type: since_last_boot
+      - type: last_boot
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+
+#https://home-assistant.io/components/sensor.cpuspeed/
+#  - platform: cpuspeed
+#    name: cpu
+    
+####################################################
+#                                                  #
+#          INTERNET PERFORMANCE METRICS            #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.speedtest/
+  - platform: speedtest
+    #server_id: 1776
+    monitored_conditions:
+      - download
+      - upload
+      - ping
+    hour:
+      - 0
+      - 3
+      - 6
+      - 9
+      - 12
+      - 15
+      - 18
+      - 21
+
+####################################################
+#                                                  #
+#           WEATHER UNDERGROUND DATA               #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.wunderground/
+  - platform: wunderground
+    api_key: !secret wu_api_key
+    lang: DL
+    #pws_id: !secret wu_pws_id
+    monitored_conditions:
+      - weather
+      - temp_high_1d_c
+      - temp_c
+      - feelslike_c
+      - temp_low_1d_c
+      - precip_1d
+      - precip_1d_mm
+      - wind_kph
+      - wind_1d_kph
+      - relative_humidity
+      - visibility_km
+      - alerts
+      - weather_1d_metric
+      - weather_1n_metric
+      - weather_2d_metric
+      - weather_2n_metric
+      - weather_3d_metric
+      - weather_3n_metric
+      - weather_4d_metric
+      - weather_4n_metric
+
+
+####################################################
+#                                                  #
+#              HOME ASSISTANT UPTIME               #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.command_line/
+  - platform: command_line
+    name: "HA Uptime"
+    command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
+    scan_interval: 720
+    value_template: >-
+      {% set uptime = value | int %}
+      {% set seconds = uptime % 60 %}
+      {% set minutes = ((uptime % 3600) / 60) | int %}
+      {% set hours = ((uptime % 86400) / 3600) | int %}
+      {% set days = (uptime / 86400) | int %}
+      {%- if days > 0 -%}
+        {%- if days == 1 -%}
+          1 day
+        {%- else -%}
+          {{ days }} days
+        {%- endif -%}
+        {{ ', ' }}
+      {%- endif -%}
+      {{ '%02d' % hours }}:{{ '%02d' % minutes }}
+
+####################################################
+#                                                  #
+#   CORRECTING VALUE OUTPUT OF MULTIPLE SENSORS    #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.template/
+  - platform: template
+    sensors:
+      since_last_boot_templated:
+        value_template: >-
+          {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
+          {%- set count = slb | length -%}
+          {%- set hms = slb[count - 1] -%}
+          {%- set hms_trimmed = hms.split('.')[0] -%}
+          {%- set hms_split = hms_trimmed.split(':') -%}
+          {%- set hours = hms_split[0] | int -%}
+
+          {%- if count == 3 -%}
+            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+            {%- if hours == 1 -%}
+              1 hour
+            {%- else -%}
+              {{ hours }} hours
+            {%- endif -%}
+          {%- endif -%}
+          
+####################################################
+#                                                  #
+#           FRITZ SWITCH POWER CONSUMPTION         #
+#                                                  #
+####################################################
+
+
+####################################################
+#                                                  #
+#           Temperature SENSORS                    #
+#                                                  #
+####################################################
+# example: http://www.instructables.com/id/Remote-Temperature-Monitoring-Using-MQTT-and-ESP82/
+  - platform: mqtt
+    state_topic: "ha/_temperature1"
+    name: "Aquarium links"
+    unit_of_measurement: "°C"
+    qos: 1
+
+  - platform: mqtt
+    state_topic: "ha/_temperature2"
+    name: "Aquarium rechts"
+    unit_of_measurement: "°C"
+    qos: 1
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

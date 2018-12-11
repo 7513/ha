@@ -1,0 +1,20 @@
+
+#https://home-assistant.io/components/device_tracker/
+
+####################################################
+#                                                  #
+#                DEVICE TRACKER                    #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/device_tracker
+  - platform: fritz
+    host: !secret fritz_ip
+    track_new_devices: no
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGUATION FILE              #
+#                                                  #
+####################################################

@@ -1,0 +1,16 @@
+  HassTurnOff:
+    speech:
+      type: plain
+      text: 'OK, schalte {{ name }} aus.'
+    action:
+      service: light.turn_off
+      data_template:
+        entity_id: light.{{ name }}
+  HassTurnOn:
+    speech:
+      type: plain
+      text: 'OK, schalte {{ name }} ein.'
+    action:
+      service: light.turn_on
+      data_template:
+        entity_id: light.{{ name }}

@@ -1,0 +1,26 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                  HA UPDATE                       #
+#                                                  #
+####################################################
+
+  - id: ha_update_notification
+    alias: 'HA update notification'
+    trigger:
+      - platform: state
+        entity_id: updater.updater
+    action:
+      service: notify.home_assistant
+      data:
+        title: 'New Home Assistant Release'
+        message: 'There is a new Home Assistant release available.'
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

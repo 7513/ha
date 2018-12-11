@@ -1,0 +1,58 @@
+
+#https://home-assistant.io/components/switch/
+
+####################################################
+#                                                  #
+#                TP-LINK SWITCH                    #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/switch.tplink/
+  - platform: tplink
+    name: TP-Link Switch
+    host: !secret hs110_ip
+
+
+####################################################
+#                                                  #
+#            AVM FRITZ!DECT SWITCH                 #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/switch.fritzdect/
+#  - platform: fritzdect
+#    username: !secret fritzhome_username
+#    password: !secret fritzhome_password
+
+####################################################
+#                                                  #
+#             WAKE ON LAN SWITCHES                 #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/switch.wake_on_lan/
+  - platform: wake_on_lan
+    name: Schrank Switch
+    mac_address: !secret schrank_mac
+    host: !secret schrank_ip
+    turn_off:
+      service: hassio.addon_stdin
+      data:
+        addon: core_rpc_shutdown
+        input: Schrank
+
+  - platform: wake_on_lan
+    name: Wachhold Switch
+    mac_address: !secret wachhold_mac
+    host: !secret wachhold_ip
+    turn_off:
+      service: hassio.addon_stdin
+      data:
+        addon: core_rpc_shutdown
+        input: Wachhold
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -1,0 +1,207 @@
+####################################################
+#                                                  #
+#                 HOME ASSISTANT                   #
+#                                                  #
+####################################################
+
+
+#https://home-assistant.io/docs/configuration/basic/
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: !secret unit
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone
+  # Customization file
+  #customize: !include customize.yaml
+  customize: !include_dir_merge_named customize/
+
+
+####################################################
+#                                                  #
+#                     GENERAL                      #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/history/
+# Enables support for tracking state changes over time
+history:
+
+#https://home-assistant.io/components/sun/
+# Track the sun
+sun:
+
+#https://home-assistant.io/components/config/
+# Enables configuration UI
+config:
+
+#https://www.home-assistant.io/components/frontend/
+# Enables the frontend
+frontend:
+  javascript_version: latest
+
+#https://home-assistant.io/components/http/
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+#https://home-assistant.io/components/recorder/
+recorder:
+  purge_interval: 1
+  purge_keep_days: 3
+
+#https://home-assistant.io/components/logger/
+logger:
+  default: error
+
+#https://www.home-assistant.io/components/updater
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+#https://www.home-assistant.io/components/discovery
+# Discover some devices automatically
+discovery:
+
+#https://www.home-assistant.io/components/conversation
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+#https://www.home-assistant.io/components/logbook
+# View all events in a logbook
+logbook:
+
+#https://www.home-assistant.io/components/map
+# Enables a map showing the location of tracked devices
+map:
+
+hassio:
+
+#https://www.home-assistant.io/components/tts
+# Text to speech
+tts:
+  - platform: google
+  
+#https://www.home-assistant.io/components/snips/
+snips:
+  feedback_sounds: true
+  probability_threshold: 0.6
+
+
+#intent_script: !include intent_script.yaml
+
+
+#https://www.home-assistant.io/docs/mqtt/broker/
+# MQTT broker
+mqtt:
+  broker: localhost
+  port: 1883
+
+####################################################
+#                                                  #
+#      LINKS TO INDIVUAL CONFIGURATION FILES       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/configuration/splitting_configuration/
+group: !include groups.yaml
+switch: !include switches.yaml
+sensor: !include sensors.yaml
+script: !include scripts.yaml
+shell_command: !include shell_commands.yaml
+binary_sensor: !include binary_sensor.yaml
+camera: !include camera.yaml
+device_tracker: !include device_tracker.yaml
+notify: !include notification.yaml
+input_boolean: !include input_boolean.yaml
+input_select: !include input_select.yaml
+automation: !include_dir_merge_list automation/
+
+####################################################
+#                                                  #
+#                   FRITZBOX                       #
+#                                                  #
+####################################################
+
+fritzbox:
+  devices:
+    - host: !secret fritz_ip
+      username: !secret fritzhome_username
+      password: !secret fritzhome_password
+
+
+####################################################
+#                                                  #
+#                   MEDIA PLAYER                   #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/media_player
+#media_player:
+#  - platform: panasonic_viera
+#    host: 192.168.75.27
+
+#media_player:
+#  - platform: mpd
+#    host: localhost
+
+
+
+####################################################
+#                                                  #
+#                TRADFRI HUB                       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/tradfri/
+tradfri:
+  host: !secret tradfri_ip
+  allow_tradfri_groups: false
+
+  
+####################################################
+#                                                  #
+#                OPEN WEATHER MAP                  #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/weather.openweathermap/
+weather:
+  platform: openweathermap
+  api_key: !secret openweather_key
+  name: Braunschweig
+  latitude: !secret latitude
+  longitude: !secret longitude
+
+
+####################################################
+#                                                  #
+#               INPUT TEXT                         #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/input_text/
+input_text:
+  utebriefinput:
+    name: Ute Brief Input
+    initial: Guten Morgen, mein Schatz :*
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

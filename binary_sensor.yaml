@@ -1,0 +1,41 @@
+
+#https://home-assistant.io/components/binary_sensor/
+
+####################################################
+#                                                  #
+#                       PING                       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/binary_sensor.ping/
+  - platform: ping
+    host: !secret schrank_ip
+    name: Schrank
+  - platform: ping
+    host: !secret wachhold_ip
+    name: Wachhold
+  - platform: ping
+    host: !secret hs110_ip
+    name: TP-Link Switch
+  - platform: ping
+    host: !secret tradfri_ip
+    name: Ikea Tradfri Gateway
+  - platform: ping
+    host: !secret zero_cam_ip
+    name: Zero Camera
+  - platform: ping
+    host: !secret chromecast_ip
+    name: Chromecast
+  - platform: ping
+    host: !secret tv_ip
+    name: TV
+  - platform: ping
+    host: !secret firetv_ip
+    name: Fire TV Stick
+
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

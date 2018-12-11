@@ -1,0 +1,20 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#                   SWITCHES                       #
+#                                                  #
+####################################################
+
+switch.schrank_switch:
+  icon: mdi:desktop-tower
+
+switch.my_smart_plug:
+  friendly_name: TP-Link Switch
+  icon: mdi:power
+
+switch.fritzdect_200:
+  icon: mdi:power
+
+switch.wachhold_switch:
+  icon: mdi:desktop-tower

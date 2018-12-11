@@ -1,0 +1,26 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                  ARRIVED HOME                    #
+#                                                  #
+####################################################
+
+  - id: jens_arrived_home
+    alias: 'Jens kommt nach Hause'
+    trigger:
+      - platform: state
+        entity_id: device_tracker.huaweip8lite
+        from: 'not_home'
+        to: 'home'
+    action:
+      service: script.turn_on
+      entity_id: script.timed_lamp
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

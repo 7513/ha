@@ -1,0 +1,48 @@
+
+#https://www.home-assistant.io/components/automation
+
+#########################################################
+#                                                       #
+#               TURN ON VACATION MODE                   #
+#                                                       #
+#########################################################
+
+  - id: vacation_mode_turn_on
+    alias: 'Turn on Vacation Mode'
+    trigger:
+      platform: state
+      entity_id: input_boolean.vacation
+      from: 'off'
+      to: 'on'
+    action:
+      service: notify.home_assistant
+      data:
+        title: 'Vaction Mode'
+        message: 'ON'
+
+
+#########################################################
+#                                                       #
+#               TURN OFF VACATION MODE                  #
+#                                                       #
+#########################################################
+
+  - id: vacation_mode_turn_off
+    alias: 'Turn off Vacation Mode'
+    trigger:
+      platform: state
+      entity_id: input_boolean.vacation
+      from: 'on'
+      to: 'off'
+    action:
+      service: notify.home_assistant
+      data:
+        title: 'Vaction Mode'
+        message: 'OFF'
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

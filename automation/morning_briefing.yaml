@@ -1,0 +1,61 @@
+#########################################################
+#                                                       #
+#                 MORNING BRIEFING                      #
+#                                                       #
+#########################################################
+
+  - id: morning_brief
+    alias: "Morning Briefing"
+    trigger:
+      platform: time
+      at: "06:15:00"
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: device_tracker.huaweip8lite
+          state: 'home'
+        - condition: state
+          entity_id: device_tracker.androidbab5065f00103f8b
+          state: 'home'
+    action:
+      - service: notify.home_assistant
+        data_template:
+          title: >
+                  Wetterbericht vom {{ now().strftime( '%d. %B %Y') }}
+          message: >
+                    Heute ist {{ now().strftime( '%A') }}, der {{ now().strftime( '%d. %B %Y') }}{{"\n"}}
+                    {{"\n"}}
+                    Die aktuelle Temperatur beträgt {{states('sensor.pws_temp_c')}} Grad Celsius. Die aktuellen Aussichten: {{states('sensor.pws_weather')}}.{{"\n"}}
+                    {{"\n"}}
+                    Vorhersage:{{"\n"}}
+                    Tagsüber: {{"\n"}}{{states('sensor.pws_weather_1d_metric')}}{{"\n"}}
+                    {{"\n"}}
+                    Nachts: {{"\n"}}{{states('sensor.pws_weather_1n_metric')}}
+
+      - service: notify.home_assistant_ute
+        data_template:
+          title: >
+                  Der heutige Wetterbericht: {{ now().strftime( '%d.%m.%Y') }}
+          message: >
+                    {{states('input_text.utebriefinput')}}{{ "\n" }}
+                    {{ "\n" }}
+                    Heute ist {{ now().strftime( '%A') }}, der {{ now().strftime( '%d. %B %Y') }}{{"\n"}}
+                    {{"\n"}}
+                    Die aktuelle Temperatur beträgt {{states('sensor.pws_temp_c')}} Grad Celsius. Die aktuellen Aussichten: {{states('sensor.pws_weather')}}.{{"\n"}}
+                    {{"\n"}}
+                    Vorhersage:{{"\n"}}
+                    Tagsüber: {{"\n"}}{{states('sensor.pws_weather_1d_metric')}}{{"\n"}}
+                    {{"\n"}}
+                    Nachts: {{"\n"}}{{states('sensor.pws_weather_1n_metric')}}
+
+#      - service: input_text.set_value
+#        data:
+#          entity_id: input_text.utebriefinput
+#          value: ""
+
+#########################################################
+#                                                       #
+#            END OF CONFIGURATION FILE                  #
+#                                                       #
+#########################################################
