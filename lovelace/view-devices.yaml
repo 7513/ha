@@ -1,0 +1,118 @@
+title: Gerätestatus
+id: device_status
+path: device_status
+icon: 'mdi:chip'
+cards:
+  - type: entities
+    title: Geräte (LAN)
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.schrank
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret schrank_ip
+      - entity: binary_sensor.wachhold
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret wachhold_ip
+      - entity: binary_sensor.pihole
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret pihole_ip
+      - entity: binary_sensor.tv
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret tv_ip
+  - type: entities
+    title: Geräte (WLAN)
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.hp
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret hp_ip
+      - entity: binary_sensor.pixel_c
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret pixelc_ip
+      - entity: binary_sensor.octoprint
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret octoprint_ip
+  - type: entities
+    title: Geräte (Haus Automation)
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.geschirrspueler
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret hs110_disher_ip
+      - entity: binary_sensor.trockner
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret hs110_dryer_ip
+      - entity: binary_sensor.waschmaschine
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret hs110_washer_ip
+      - entity: binary_sensor.toaster
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret hs110_toaster_ip
+      - entity: binary_sensor.ikea_gateway
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret tradfri_ip
+      - entity: binary_sensor.chromecast
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret chromecast_ip
+      - entity: binary_sensor.snips_sat_flur
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret snips_sat_flur_ip
+      - entity: binary_sensor.snips
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret snips_ip
+      - entity: binary_sensor.fire_tv_stick
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret firetv_ip
+      - entity: binary_sensor.ir_devices
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret ir_devices_ip
+      - entity: binary_sensor.galaxynexus
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: !secret galaxynexus_ip
+  - type: entities
+    title: PC herunterfahren
+    show_header_toggle: false
+    entities:
+      - switch.schrank
+      - switch.wachhold
+  - type: entities
+    title: Netzwerk
+    show_header_toggle: false
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+  - type: entities
+    title: Pi-hole Status
+    show_header_toggle: false
+    entities:
+#      - entity: switch.pihole_switch
+#        name: Ad Blocking
+#        icon: mdi:pi-hole
+#        type: "custom:secondaryinfo-entity-row"
+ #       secondary_info: "Turn off to stop blocking for 1 hour"
+      - entity: sensor.pi_hole_dns_queries_today
+      - entity: sensor.pi_hole_ads_blocked_today
+      - entity: sensor.pi_hole_ads_percentage_blocked_today
+      - type: divider
+      - entity: sensor.pi_hole_dns_unique_clients
+      - entity: sensor.pi_hole_domains_blocked
+  - type: entities
+    title: Octoprint
+    show_header_toggle: false
+    entities:
+      - binary_sensor.anycubic_printing
+      - binary_sensor.anycubic_printing_error
+      - sensor.anycubic_current_state
+      - sensor.anycubic_job_percentage
+      - sensor.anycubic_actual_bed_temp
+      - sensor.anycubic_target_bed_temp
+      - sensor.anycubic_actual_tool0_temp
+      - sensor.anycubic_target_tool0_temp
+      - sensor.anycubic_time_elapsed
+      - sensor.anycubic_time_remaining
+  - type: picture-entity
+    entity: camera.octoprint_camera
+  - type: media-control
+    entity: media_player.mpd
+    

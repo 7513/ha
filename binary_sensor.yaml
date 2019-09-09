@@ -10,28 +10,77 @@
 #https://home-assistant.io/components/binary_sensor.ping/
   - platform: ping
     host: !secret schrank_ip
-    name: Schrank
+    count: 2
+    name: schrank
   - platform: ping
     host: !secret wachhold_ip
-    name: Wachhold
+    count: 2
+    name: wachhold
   - platform: ping
-    host: !secret hs110_ip
-    name: TP-Link Switch
+    host: !secret hs110_disher_ip
+    count: 2
+    name: geschirrspueler
+  - platform: ping
+    host: !secret hs110_dryer_ip
+    count: 2
+    name: trockner
+  - platform: ping
+    host: !secret hs110_washer_ip
+    count: 2
+    name: waschmaschine
+  - platform: ping
+    host: !secret hs110_toaster_ip
+    count: 2
+    name: toaster
   - platform: ping
     host: !secret tradfri_ip
-    name: Ikea Tradfri Gateway
-  - platform: ping
-    host: !secret zero_cam_ip
-    name: Zero Camera
+    count: 2
+    name: ikea_gateway
   - platform: ping
     host: !secret chromecast_ip
-    name: Chromecast
+    count: 2
+    name: chromecast
   - platform: ping
     host: !secret tv_ip
-    name: TV
+    count: 2
+    name: tv
   - platform: ping
     host: !secret firetv_ip
-    name: Fire TV Stick
+    count: 2
+    name: fire_tv_stick
+  - platform: ping
+    host: !secret ir_devices_ip
+    count: 2
+    name: ir_devices
+  - platform: ping
+    host: !secret galaxynexus_ip
+    count: 2
+    name: galaxynexus
+  - platform: ping
+    host: !secret octoprint_ip
+    count: 2
+    name: octoprint
+  - platform: ping
+    host: !secret pihole_ip
+    count: 2
+    name: pihole
+  - platform: ping
+    host: !secret hp_ip
+    count: 2
+    name: hp
+  - platform: ping
+    host: !secret snips_sat_flur_ip
+    count: 2
+    name: snips_sat_flur
+  - platform: ping
+    host: !secret snips_ip
+    count: 2
+    name: snips
+  - platform: ping
+    host: !secret pixelc_ip
+    count: 2
+    name: pixel_c
+
 
 
 ####################################################

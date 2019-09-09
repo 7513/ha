@@ -1,29 +1,4 @@
-
 #https://home-assistant.io/components/switch/
-
-####################################################
-#                                                  #
-#                TP-LINK SWITCH                    #
-#                                                  #
-####################################################
-
-#https://www.home-assistant.io/components/switch.tplink/
-  - platform: tplink
-    name: TP-Link Switch
-    host: !secret hs110_ip
-
-
-####################################################
-#                                                  #
-#            AVM FRITZ!DECT SWITCH                 #
-#                                                  #
-####################################################
-
-#https://www.home-assistant.io/components/switch.fritzdect/
-#  - platform: fritzdect
-#    username: !secret fritzhome_username
-#    password: !secret fritzhome_password
-
 ####################################################
 #                                                  #
 #             WAKE ON LAN SWITCHES                 #
@@ -32,7 +7,7 @@
 
 #https://home-assistant.io/components/switch.wake_on_lan/
   - platform: wake_on_lan
-    name: Schrank Switch
+    name: schrank
     mac_address: !secret schrank_mac
     host: !secret schrank_ip
     turn_off:
@@ -42,7 +17,7 @@
         input: Schrank
 
   - platform: wake_on_lan
-    name: Wachhold Switch
+    name: wachhold
     mac_address: !secret wachhold_mac
     host: !secret wachhold_ip
     turn_off:
@@ -50,6 +25,21 @@
       data:
         addon: core_rpc_shutdown
         input: Wachhold
+        
+  - platform: command_line
+    switches:
+      stereoanlage:
+        command_on: 'sh /home/pi/scripts/irsend.sh 7501'
+        command_off: 'sh /home/pi/scripts/irsend.sh 7501' 
+        friendly_name: 'Stereoanlage'
+      tv:
+        command_on: 'sh /home/pi/scripts/irsend.sh 1301'
+        command_off: 'sh /home/pi/scripts/irsend.sh 1301'
+        friendly_name: 'Fernseher'
+      raptor:
+        command_on: 'sh /home/pi/scripts/irsend.sh 1401'
+        command_off: 'sh /home/pi/scripts/irsend.sh 1401'
+        friendly_name: 'Raptor'
 
 ####################################################
 #                                                  #

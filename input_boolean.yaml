@@ -2,13 +2,36 @@
 
 ####################################################
 #                                                  #
-#                 VACATION MODE                    #
+#                 INPUT BOOLEAN                    #
 #                                                  #
 ####################################################
 
   vacation:
-    name: Vacation Mode
     initial: off
+    
+  dish_washer_finished:
+    initial: off
+  dish_washer_running:
+    initial: off
+    
+  washer_finished:
+    initial: off
+  washer_running:
+    initial: off
+
+  dryer_finished:
+    initial: off
+  dryer_running:
+    initial: off
+    
+  toaster_finished:
+    initial: off
+  toaster_running:
+    initial: off
+    
+  someone_home:
+    initial: off
+
 
 ####################################################
 #                                                  #

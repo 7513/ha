@@ -1,23 +1,87 @@
-timed_lamp:
-  alias: "Turn on lamp and set timer"
-  sequence:
-    # Cancel ev. old timers 
-    - service: script.turn_off
-      data: 
-        entity_id: script.timer_off
-    - service: light.turn_on
-      data:
-        entity_id: light.stehlampe
-    # Set new timer 
-    - service: script.turn_on
-      data:
-        entity_id: script.timer_off
 
-timer_off:
-  alias: "Turn off lamp after 2 minutes"
-  sequence:
-  - delay:
-     minutes: 2
-  - service: light.turn_off
-    data: 
-      entity_id: light.stehlampe
+#https://www.home-assistant.io/components/script
+
+####################################################
+#                                                  #
+#                     SCRIPTS                      #
+#                                                  #
+####################################################
+
+  timed_lamp:
+    sequence:
+      # Cancel ev. old timers 
+      - service: script.turn_off
+        data: 
+          entity_id: script.timer_off
+      - service: light.turn_on
+        data:
+          entity_id: light.besta
+      # Set new timer 
+      - service: script.turn_on
+        data:
+          entity_id: script.timer_off
+
+  timer_off:
+    sequence:
+    - delay:
+       minutes: 2
+    - service: light.turn_off
+      data: 
+        entity_id: light.besta
+        
+  reminder_window_open:
+    sequence:
+      # Cancel ev. old timers 
+      - service: script.turn_off
+        data: 
+          entity_id: script.delay_window_open
+      - condition: template
+        value_template: > 
+          {{ is_state(window, 'on') }}
+      - service: script.google_say
+        data_template:
+           message: 'Das {{ state_attr(window, "friendly_name") }} ist immer noch offen.'
+      - service: script.delay_window_open
+        data_template:
+          window: "{{ window }}"
+
+  delay_window_open:
+    sequence:
+      - delay:
+          seconds: 20
+      - service: script.reminder_window_open
+        data_template: 
+          window: "{{ window }}"
+          
+  google_say:
+    sequence:
+      - service: notify.galaxynexus_say
+        data_template:
+          message: "{{ message }}"
+          
+####################################################
+#                                                  #
+#                 NORMAL LIGHT                     #
+#                                                  #
+####################################################
+
+  normallight:
+    sequence:
+      - service: light.turn_on
+        entity_id: light.steplampe
+        data:
+          brightness: 254
+          color_temp: 336.02150537634407
+          
+####################################################
+#                                                  #
+#                RETURN TO NORMAL LIGHT            #
+#                                                  #
+####################################################
+
+  returntonormal:
+    sequence:
+      - service: script.normallight
+      - delay: '00:00:01'
+      - service: light.turn_off
+        entity_id: light.stehlampe

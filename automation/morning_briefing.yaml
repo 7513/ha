@@ -4,8 +4,7 @@
 #                                                       #
 #########################################################
 
-  - id: morning_brief
-    alias: "Morning Briefing"
+  - alias: 'morning_briefing'
     trigger:
       platform: time
       at: "06:15:00"
@@ -16,7 +15,7 @@
           entity_id: device_tracker.huaweip8lite
           state: 'home'
         - condition: state
-          entity_id: device_tracker.androidbab5065f00103f8b
+          entity_id: device_tracker.pocophonef1pocophon
           state: 'home'
     action:
       - service: notify.home_assistant

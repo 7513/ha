@@ -1,7 +1,8 @@
-
 #https://home-assistant.io/components/sensor/
-
   - platform: yr
+    monitored_conditions:
+      - temperature
+      - symbol
 
 
 ####################################################
@@ -13,43 +14,28 @@
 #https://home-assistant.io/components/sensor.systemmonitor/
   - platform: systemmonitor
     resources:
+      - type: processor_use
       - type: disk_use_percent
         arg: /home
       - type: memory_use_percent
-      - type: processor_use
-      - type: since_last_boot
       - type: last_boot
       - type: network_in
         arg: eth0
       - type: network_out
         arg: eth0
 
-#https://home-assistant.io/components/sensor.cpuspeed/
-#  - platform: cpuspeed
-#    name: cpu
+#https://www.home-assistant.io/components/sensor.command_line/
+  - platform: command_line
+    name: cpu_temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
     
 ####################################################
 #                                                  #
 #          INTERNET PERFORMANCE METRICS            #
 #                                                  #
 ####################################################
-
-#https://home-assistant.io/components/sensor.speedtest/
-  - platform: speedtest
-    #server_id: 1776
-    monitored_conditions:
-      - download
-      - upload
-      - ping
-    hour:
-      - 0
-      - 3
-      - 6
-      - 9
-      - 12
-      - 15
-      - 18
-      - 21
 
 ####################################################
 #                                                  #
@@ -91,55 +77,42 @@
 #                                                  #
 ####################################################
 
-#https://home-assistant.io/components/sensor.command_line/
-  - platform: command_line
-    name: "HA Uptime"
-    command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
-    scan_interval: 720
-    value_template: >-
-      {% set uptime = value | int %}
-      {% set seconds = uptime % 60 %}
-      {% set minutes = ((uptime % 3600) / 60) | int %}
-      {% set hours = ((uptime % 86400) / 3600) | int %}
-      {% set days = (uptime / 86400) | int %}
-      {%- if days > 0 -%}
-        {%- if days == 1 -%}
-          1 day
-        {%- else -%}
-          {{ days }} days
-        {%- endif -%}
-        {{ ', ' }}
-      {%- endif -%}
-      {{ '%02d' % hours }}:{{ '%02d' % minutes }}
+  - platform: uptime
 
-####################################################
-#                                                  #
-#   CORRECTING VALUE OUTPUT OF MULTIPLE SENSORS    #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/sensor.template/
   - platform: template
     sensors:
-      since_last_boot_templated:
-        value_template: >-
-          {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
-          {%- set count = slb | length -%}
-          {%- set hms = slb[count - 1] -%}
-          {%- set hms_trimmed = hms.split('.')[0] -%}
-          {%- set hms_split = hms_trimmed.split(':') -%}
-          {%- set hours = hms_split[0] | int -%}
+      ha_uptime:
+          value_template: >
+              {% if states('sensor.uptime') == '0.0' %}
+                  Just restarted...
+              {% else %}
+                  {% macro phrase(value, name) %}
+                  {%- set value = value | int %}
+                  {%- set end = 's' if value > 1 else '' %}
+                  {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
+                  {%- endmacro %}
+                  {% set weeks = (states('sensor.uptime') | int / 7) | int %}
+                  {% set days = (states('sensor.uptime') | int) - (weeks * 7) %}
+                  {% set hours = (states('sensor.uptime') | float - states('sensor.uptime') | int) * 24 %}
+                  {% set minutes = (hours - hours | int) * 60 %}
+                  {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min') ] | select('!=','') | list | join(', ') }}
+              {% endif %}
 
-          {%- if count == 3 -%}
-            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
-          {%- endif -%}
-          {%- if hours > 0 -%}
-            {%- if hours == 1 -%}
-              1 hour
-            {%- else -%}
-              {{ hours }} hours
-            {%- endif -%}
-          {%- endif -%}
+      since_last_boot_templated:
+        value_template: >
+            {% set date = as_timestamp(states('sensor.last_boot')) | timestamp_custom('%d') %}
+            {% set date = '{:01}'.format(date | int) %}
+            {% if date in ('1', '21', '31') %}
+                {% set date = date ~ 'st' %}
+            {% elif date in ('2', '22') %}
+                {% set date = date ~ 'nd' %}
+            {% elif date in ('3', '23') %}
+                {% set date = date ~ 'rd' %}
+            {% else %}
+                {% set date = date ~ 'th' %}
+            {% endif %}
+            {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%H:%M on %a') }} {{ date }} {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%b %Y') }}
+
           
 ####################################################
 #                                                  #
@@ -156,16 +129,166 @@
 # example: http://www.instructables.com/id/Remote-Temperature-Monitoring-Using-MQTT-and-ESP82/
   - platform: mqtt
     state_topic: "ha/_temperature1"
-    name: "Aquarium links"
+    name: 'temp_aq_left'
     unit_of_measurement: "°C"
     qos: 1
 
   - platform: mqtt
     state_topic: "ha/_temperature2"
-    name: "Aquarium rechts"
+    name: 'temp_aq_right'
     unit_of_measurement: "°C"
     qos: 1
 
+####################################################
+#                                                  #
+#          Temperature/Humidity SENSORS            #
+#                                                  #
+####################################################
+  - platform: template
+    sensors:
+      home_temperature:
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('weather.home', 'temperature') }}"
+  - platform: template
+    sensors:
+      home_humidity:
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('weather.home', 'humidity') }}"
+
+####################################################
+#                                                  #
+#                   MQTT SENSORS                   #
+#                                                  #
+####################################################
+#  - platform: mqtt  
+#    state_topic: "hermes/asr/textCaptured"  
+#    name: "Answer"    
+#    value_template: '{{ value_json.text }}'
+#
+#  - platform: mqtt  
+#    state_topic: "hermes/nlu/intentParsed"  
+#    name: "textinput"    
+#    value_template: '{{ value_json.input }}'
+#
+#  - platform: mqtt  
+#    state_topic: "hermes/nlu/intentParsed"  
+#    name: "intentname"    
+#    value_template: '{{ value_json.intent.intentName }}'
+#
+#  - platform: mqtt  
+#    state_topic: "hermes/nlu/intentParsed"  
+#    name: "probability"    
+#    value_template: '{{ value_json.intent.probability }}'
+
+####################################################
+#                                                  #
+#           Dish Washer SENSOR                     #
+#                                                  #
+####################################################
+#  - platform: template
+#    sensors:
+#      dish_washer_current:
+#        friendly_name: 'Geschirrspüler aktuell <0.75 Watt'
+#        value_template: '{{ states.switch.disher.attributes["current_power_w"] | replace(" W", "") | float <0.75 }}' 
+
+  - platform: template
+    sensors:
+      dish_washer_amps:
+        value_template: '{{ states.switch.disher.attributes.current_a}}'
+        unit_of_measurement: 'A'
+      dish_washer_volts:
+        value_template: '{{ states.switch.disher.attributes.voltage}}'
+        unit_of_measurement: 'V'
+      dish_washer_watts:
+        value_template: '{{ states.switch.disher.attributes.current_power_w}}'
+        unit_of_measurement: 'W'
+      dish_washer_total_kw:
+        value_template: '{{ states.switch.disher.attributes.total_energy_kwh}}'
+        unit_of_measurement: 'kWh'
+        
+####################################################
+#                                                  #
+#               Washer SENSOR                      #
+#                                                  #
+####################################################
+  - platform: template
+    sensors:
+      washer_amps:
+        value_template: '{{ states.switch.washer.attributes.current_a}}'
+        unit_of_measurement: 'A'
+      washer_volts:
+        value_template: '{{ states.switch.washer.attributes.voltage}}'
+        unit_of_measurement: 'V'
+      washer_watts:
+        value_template: '{{ states.switch.washer.attributes.current_power_w}}'
+        unit_of_measurement: 'W'
+      washer_total_kw:
+        value_template: '{{ states.switch.washer.attributes.total_energy_kwh}}'
+        unit_of_measurement: 'kWh'
+        
+####################################################
+#                                                  #
+#                Dryer SENSOR                      #
+#                                                  #
+####################################################
+  - platform: template
+    sensors:
+      dryer_amps:
+        value_template: '{{ states.switch.dryer.attributes.current_a}}'
+        unit_of_measurement: 'A'
+      dryer_volts:
+        value_template: '{{ states.switch.dryer.attributes.voltage}}'
+        unit_of_measurement: 'V'
+      dryer_watts:
+        value_template: '{{ states.switch.dryer.attributes.current_power_w}}'
+        unit_of_measurement: 'W'
+      dryer_total_kw:
+        value_template: '{{ states.switch.dryer.attributes.total_energy_kwh}}'
+        unit_of_measurement: 'kWh'
+        
+####################################################
+#                                                  #
+#              Toaster SENSOR                      #
+#                                                  #
+####################################################
+  - platform: template
+    sensors:
+      toaster_amps:
+        value_template: '{{ states.switch.toaster.attributes.current_a}}'
+        unit_of_measurement: 'A'
+      toaster_volts:
+        value_template: '{{ states.switch.toaster.attributes.voltage}}'
+        unit_of_measurement: 'V'
+      toaster_watts:
+        value_template: '{{ states.switch.toaster.attributes.current_power_w}}'
+        unit_of_measurement: 'W'
+      toaster_total_kw:
+        value_template: '{{ states.switch.toaster.attributes.total_energy_kwh}}'
+        unit_of_measurement: 'kWh'
+
+
+####################################################
+#                                                  #
+#                    PiHole                        #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/pi_hole/
+
+  - platform: pi_hole
+    host: !secret pihole_ip
+    ssl: false
+    verify_ssl: false
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+      - dns_queries_today
+      - domains_being_blocked
+      - queries_cached
+      - queries_forwarded
+      - unique_clients
+      - unique_domains
+      
 ####################################################
 #                                                  #
 #            END OF CONFIGURATION FILE             #

@@ -6,20 +6,67 @@
 #                                                  #
 ####################################################
 
-automation.morning_briefing:
-  icon: mdi:weather-sunset
-  
-automation.turn_off_vacation_mode:
-  icon: mdi:beach
-
-automation.turn_on_vacation_mode:
-  icon: mdi:beach
-
-automation.jens_kommt_nach_hause:
+automation.kommt_nach_hause:
+  friendly_name: 'Kommt nach Hause'
   icon: mdi:home-outline
 
-automation.ha_update_notification:
+automation.verlasst_das_haus:
+  friendly_name: 'Verlässt das Haus'
+  icon: mdi:home-outline
+  
+#automation.action_set_dish_washer_to_running:
+#automation.action_set_dish_washer_finished:
+#automation.action_set_dish_washer_as_finished:
+#automation.notify_dish_washer_finished:
+
+#automation.action_set_dryer_to_running:
+#automation.action_set_dryer_finished:
+#automation.action_set_dryer_as_finished:
+#automation.notify_dryer_finished:
+
+#automation.action_set_toaster_to_running:
+#automation.action_set_toaster_finished:
+#automation.action_set_toaster_as_finished:
+#automation.notify_toaster_finished:
+
+#automation.action_set_washer_to_running:
+#automation.action_set_washer_finished:
+#automation.action_set_washer_as_finished:
+#automation.notify_washer_finished:
+
+automation.toggle_lamps:
+  friendly_name: 'Schalte kleine Lampen'
+  
+automation.infrared_test:
+  friendly_name: 'IR Webcontrol Test'
+
+automation.ha_update_notify:
+  friendly_name: 'Hassio Update Meldung'
   icon: mdi:autorenew
+  
+automation.nachtlicht_aus:
+  friendly_name: 'Nachtlicht: aus'
+
+automation.nachtlicht_an:
+  friendly_name: 'Nachtlicht: an'
+  
+automation.morning_briefing:
+  friendly_name: 'Täglicher Wetterbericht'
+  icon: mdi:weather-sunset
+  
+automation.urlaubsmodus_ein:
+  friendly_name: 'Urlaubsmodus: ein'
+  icon: mdi:beach
+
+automation.urlaubsmodus_aus:
+  friendly_name: 'Urlaubsmodus: aus'
+  icon: mdi:beach
+
+automation.fenster_offen:
+  friendly_name: 'Ein Fenster ist offen'
+  
+automation.check_window_open:
+  friendly_name: 'Überprüfe, welche Fenster sind offen'
 
 ####################################################
 #                                                  #

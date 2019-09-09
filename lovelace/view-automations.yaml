@@ -1,0 +1,54 @@
+title: Automationen
+id: automations
+path: automations
+icon: 'mdi:home-variant'
+cards:
+  - type: entities
+    title: Home Assistant
+    show_header_toggle: false
+    entities:
+      - automation.ha_update_notify
+  - type: entities
+    title: Tracker
+    show_header_toggle: false
+    entities:
+      - automation.verlasst_das_haus
+      - automation.kommt_nach_hause
+  - type: entities
+    title: Urlaubsmodus
+    show_header_toggle: false
+    entities:
+      - automation.urlaubsmodus_ein
+      - automation.urlaubsmodus_aus
+  - type: entities
+    title: Andere
+    show_header_toggle: false
+    entities:
+      - automation.morning_briefing
+  - type: entities
+    title: Automatisierung
+    entities:
+      - automation.nachtlicht_an
+      - automation.set_notification_bulb2_color
+      - automation.set_notification_bulb2_normal
+      - automation.action_set_toaster_to_running
+      - automation.action_set_toaster_finished
+      - automation.action_set_toaster_as_finished
+      - automation.notify_toaster_finished
+      - automation.action_set_washer_to_running
+      - automation.action_set_washer_finished
+      - automation.action_set_washer_as_finished
+      - automation.notify_washer_finished
+      - automation.fenster_offen
+      - automation.check_window_open
+      - automation.action_set_dish_washer_to_running
+      - automation.action_set_dish_washer_finished
+      - automation.action_set_dish_washer_as_finished
+      - automation.notify_dish_washer_finished
+      - automation.toggle_lamps
+      - automation.infrared_test
+      - automation.action_set_dryer_to_running
+      - automation.action_set_dryer_finished
+      - automation.action_set_dryer_as_finished
+      - automation.notify_dryer_finished
+      - automation.nachtlicht_aus

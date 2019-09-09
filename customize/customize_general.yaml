@@ -7,9 +7,36 @@
 ####################################################
 
 input_boolean.vacation:
-  friendly_name: Urlaubsmodus
+  friendly_name: 'Urlaubsmodus'
   icon: mdi:beach
   
+input_boolean.dish_washer_finished:
+  friendly_name: 'Geschirrspüler fertig'
+
+input_boolean.dish_washer_running:
+  friendly_name: 'Geschirrspüler läuft'
+
+input_boolean.washer_finished:
+  friendly_name: 'Waschmaschine fertig'
+
+input_boolean.washer_running:
+  friendly_name: 'Waschmaschine läuft'
+
+input_boolean.dryer_finished:
+  friendly_name: 'Wäschetrockner fertig'
+
+input_boolean.dryer_running:
+  friendly_name: 'Wäschetrockner läuft'
+
+input_boolean.toaster_finished:
+  friendly_name: 'Toaster fertig'
+
+input_boolean.toaster_running:
+  friendly_name: 'Toaster fertig'
+
+input_boolean.someone_home:
+  friendly_name: 'Jemand zu Hause'
+
 
 ####################################################
 #                                                  #
@@ -18,8 +45,24 @@ input_boolean.vacation:
 ####################################################
 
 input_select.notification_bulb2_color:
-  friendly_name: Benachrichtigungslicht
+  friendly_name: 'Benachrichtigungslicht'
+  icon: mdi:lightbulb
 
+input_select.dish_washer_status:
+  friendly_name: 'Status Geschirrspüler'
+  icon: mdi:dishwasher
+  
+input_select.washer_status:
+  friendly_name: 'Status Waschmaschine'
+  icon: mdi:washing-machine
+  
+input_select.dryer_status:
+  friendly_name: 'Status Wäschetrockner'
+  icon: mdi:tumble-dryer
+  
+input_select.toaster_status:
+  friendly_name: 'Status Toaster'
+  icon: mdi:toaster-oven
 
 
 ####################################################

@@ -1,0 +1,43 @@
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                 DOUBLE SWITCH                    #
+#                                                  #
+####################################################
+
+  - alias: 'toggle_lamps'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: wandsender_2_fach
+          #left btn
+          event: 1002
+          #right btn
+          #event: 2002
+    action:
+      - service: light.toggle
+        entity_id: group.kleine_lampe
+        
+  - alias: 'infrared_test'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: wandsender_2_fach
+          #right btn
+          event: 2002
+    action:
+      - service: shell_command.ir_http
+        data_template:
+          code: '{{"7501" | urlencode}}'
+
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

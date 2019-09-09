@@ -1,0 +1,13 @@
+title: Unser zu Hause
+resources: !include lovelace/resources.yaml
+cch: !include lovelace/cch.yaml
+views:
+#  - !include lovelace/view-overview.yaml
+  - !include lovelace/view-rooms.yaml
+  - !include lovelace/view-devices.yaml
+  - !include lovelace/view-ha_status.yaml
+  - !include lovelace/view-automations.yaml
+  - !include lovelace/view-switches.yaml
+  - !include lovelace/view-weather.yaml
+  - !include lovelace/view-settings.yaml
+  - !include lovelace/view-floorplan.yaml

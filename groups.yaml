@@ -7,8 +7,7 @@
 #                                                  #
 ####################################################
   #Default_view:
-  Rooms:
-    name: Rooms
+  rooms:
     view: yes
     icon: mdi:home
     entities:
@@ -17,50 +16,52 @@
       - group.children_room
       - group.bathroom
       - group.corridor
-#      - group.bedroom
-#      - group.kitchen
+      - group.bedroom
+      - group.kitchen
 
-  Device Status:
+  device_status:
     view: yes
     icon: mdi:chip
     entities:
       - group.devices
-      - group.computer_shutdown__restart
+      - group.computer_shutdown_restart
       - group.network_performance
 
-  HA:
+  ha:
     view: yes
     icon: mdi:home-assistant
     entities:
-      - group.ha_server_monitor
+      - group.ha_monitor
       - group.batteries
       
-  Automations:
+  automations:
     view: yes
     icon: mdi:playlist-play
     entities:
-      - group.vacation_mode_automations
-      - group.home_assistant_automations
-      - group.device_tracker_automations
-      - group.other_automations
+      - group.home_assistant
+      - group.device_tracker
+      - group.vacation_mode
+      - group.other
       
-  Switches:
+  switches:
     view: yes
     icon: mdi:toggle-switch
     entities:
-      - group.fritz_switches
-      - group.tp_link_switches
+      - group.fritzdect_switches
+      - group.tplink_switches
       
-  Weather:
+  weather:
     view: yes
-    icon: mdi:weather-partlycloudy
+    icon: mdi:weather-partly-cloudy
     entities:
+      - sensor.current_weather_symbol
+      - sensor.current_weather_temperature
       - camera.niederschlagsradar
       - group.local_weather
       - group.forecast4
       - weather.braunschweig
       
-  Other:
+  settings:
     view: yes
     icon: mdi:skull
     entities:
@@ -77,26 +78,28 @@
 #                  AUTOMATIONS                     #
 ####################################################
 
-  Vacation Mode Automations:
+  home_assistant:
     control: hidden
     entities:
-      - automation.turn_off_vacation_mode
-      - automation.turn_on_vacation_mode
+      - automation.ha_update_notify
 
-  Device Tracker Automations:
+  device_tracker:
     control: hidden
     entities:
-      - automation.jens_kommt_nach_hause
+      - automation.verlasst_das_haus
+      - automation.kommt_nach_hause
 
-  Home Assistant Automations:
+  vacation_mode:
     control: hidden
     entities:
-      - automation.ha_update_notification
+      - automation.urlaubsmodus_ein
+      - automation.urlaubsmodus_aus
       
-  Other Automations:
+  other:
     control: hidden
     entities:
       - automation.morning_briefing
+
 
 
 
@@ -104,56 +107,90 @@
 #                      OTHER                       #
 ####################################################
 
-  Location:
-    - device_tracker.huaweip8lite
-    - device_tracker.androidbab5065f00103f8b
-    - input_boolean.vacation
+  location:
+    entities:
+      - device_tracker.mi8_miphone
+      - device_tracker.pocophonef1pocophon
+      - input_boolean.vacation
 
 
 ####################################################
 #                     ROOMS                        #
 ####################################################
 
-  Living Room:
+
+  living_room:
     control: hidden
     entities:
-#      - input_select.notification_bulb2_color
+      - binary_sensor.esstischfenster
+      - binary_sensor.balkonfenster
       - climate.hk_fenster
       - climate.hk_balkon
-      - light.wohnzimmerlicht
+      - light.wohnzimmer
       - light.esstisch
       - light.besta
       - light.kugel
-      - light.stehlampe
-#      - sensor.fb_wz
+      - sensor.temp_aq_left
+      - sensor.temp_aq_right
 
-  Children Room:
+  children_room:
     control: hidden
     entities:
       - light.kinderzimmer
       - light.nachtlicht
+      - binary_sensor.kinderzimmerfenster
+      - sensor.kinderzimmer_temperature
+      - sensor.kinderzimmer_humidity
+      - sensor.kinderzimmer_pressure
+      - sensor.nachtlicht_fb
 
-  Bathroom:
+  bathroom:
     control: hidden
     entities:
+      - binary_sensor.badfenster
       - climate.hk_bad
+      - sensor.bad_temperature
+      - sensor.bad_humidity
+      - sensor.bad_pressure
       
-  Corridor:
+  corridor:
     control: hidden
     entities:
       - light.flur
 #      - sensor.flur_bewegungsmelder
+      - sensor.wandsender_2_fach_battery_level
       
-#  Bedroom:
-#    control: hidden
-#    entities:
-#      - light.schlafzimmer
-#      - light.lampe_gross
-#      - sensor.fb_sz
+  bedroom:
+    control: hidden
+    entities:
+      - binary_sensor.schlafzimmerfenster
+      - light.stehlampe
+      - sensor.benachrichtigung_fb
 
-#  Kitchen:
-#    control: hidden
-#    entities:
+
+  kitchen:
+    entities:
+      - binary_sensor.kuchenfenster
+      - sensor.kuche_temperature
+      - sensor.kuche_humidity
+      - sensor.kuche_pressure
+      - sensor.dish_washer_amps
+      - sensor.dish_washer_volts
+      - sensor.dish_washer_watts
+      - sensor.dish_washer_total_kw
+      - sensor.washer_amps
+      - sensor.washer_volts
+      - sensor.washer_watts
+      - sensor.washer_total_kw
+      - sensor.dryer_amps
+      - sensor.dryer_volts
+      - sensor.dryer_watts
+      - sensor.dryer_total_kw
+      - sensor.toaster_amps
+      - sensor.toaster_volts
+      - sensor.toaster_watts
+      - sensor.toaster_total_kw
+#      - group.dish_washer
 #      - camera.zero_camera
 
 
@@ -161,55 +198,91 @@
 #                   SWITCHES                       #
 ####################################################
 
-  Fritz Switches:
+  fritzdect_switches:
     control: hidden
     entities:
-      - switch.fritzdect_200
+      - switch.fritz_dect_200
     
-  TP Link Switches:
+  tplink_switches:
     control: hidden
     entities:
-      - switch.my_smart_plug
+      - switch.washer
+      - switch.disher
+      - switch.dryer
+      - switch.toaster
 
-
+  computer_shutdown_restart:
+    control: hidden
+    entities:
+      - switch.schrank
+      - switch.wachhold
 
 ####################################################
 #                   SENSORS                        #
 ####################################################
 
-  Devices:
-    - binary_sensor.chromecast
-    - binary_sensor.ikea_tradfri_gateway
-    - binary_sensor.schrank
-    - binary_sensor.tplink_switch
-    - binary_sensor.tv
-    - binary_sensor.wachhold
-    - binary_sensor.zero_camera
-    - binary_sensor.fire_tv_stick
-
-  HA Server Monitor:
-    - sensor.processor_use
-    - sensor.disk_use_percent_home
-    - sensor.memory_use_percent
-    - sensor.since_last_boot_templated
-    - sensor.ha_uptime
-    - sensor.network_in_eth0
-    - sensor.network_out_eth0
-#    - sensor.cpu
-#    - sensor.connected_clients
-
-  Network Performance:
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-    - sensor.speedtest_ping
-    
-  Batteries:
+  devices:
     entities:
-      - sensor.fb_wz
-      - sensor.fb_sz
-      - sensor.flur_bewegungsmelder
-      
-  Local Weather:
+      - binary_sensor.schrank
+      - binary_sensor.wachhold
+      - binary_sensor.geschirrspueler
+      - binary_sensor.trockner
+      - binary_sensor.waschmaschine
+      - binary_sensor.toaster
+      - binary_sensor.ikea_gateway
+      - binary_sensor.chromecast
+      - binary_sensor.tv
+      - binary_sensor.fire_tv_stick
+      - binary_sensor.ir_devices
+      - binary_sensor.galaxynexus
+      - binary_sensor.octoprint
+      - binary_sensor.pihole
+      - binary_sensor.hp
+      - binary_sensor.snips_sat_flur
+      - binary_sensor.snips
+      - binary_sensor.pixel_c
+
+  ha_monitor:
+    entities:
+      - sensor.processor_use
+      - sensor.disk_use_percent_home
+      - sensor.memory_use_percent
+      - sensor.last_boot
+      - sensor.since_last_boot_templated
+      - sensor.ha_uptime
+      - sensor.network_in_eth0
+      - sensor.network_out_eth0
+
+  network_performance:
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+    
+  batteries:
+    entities:
+      - sensor.nachtlicht_fb
+      - sensor.benachrichtigung_fb
+
+  octoprint:
+    entities:
+      - binary_sensor.anycubic_printing
+      - binary_sensor.anycubic_printing_error
+      - sensor.anycubic_current_state
+      - sensor.anycubic_job_percentage
+      - sensor.anycubic_actual_bed_temp
+      - sensor.anycubic_target_bed_temp
+      - sensor.anycubic_actual_tool0_temp
+      - sensor.anycubic_target_tool0_temp
+      - sensor.anycubic_time_elapsed
+      - sensor.anycubic_time_remaining
+
+
+####################################################
+#                   WEATHER                        #
+####################################################
+
+  local_weather:
     entities:
       - sensor.pws_weather
       - sensor.pws_temp_high_1d_c
@@ -226,31 +299,39 @@
       - sun.sun
 
   forecast4:
-    name: Four Day Forecast
     entities:
-     - sensor.pws_weather_1d_metric
-     - sensor.pws_weather_1n_metric
-     - sensor.pws_weather_2d_metric
-     - sensor.pws_weather_2n_metric
-     - sensor.pws_weather_3d_metric
-     - sensor.pws_weather_3n_metric
-     - sensor.pws_weather_4d_metric
-     - sensor.pws_weather_4n_metric
-     - sensor.pws_weather_5d_metric
-     - sensor.pws_weather_5n_metric
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_weather_1n_metric
+      - sensor.pws_weather_2d_metric
+      - sensor.pws_weather_2n_metric
+      - sensor.pws_weather_3d_metric
+      - sensor.pws_weather_3n_metric
+      - sensor.pws_weather_4d_metric
+      - sensor.pws_weather_4n_metric
+     
+####################################################
+#                   WINDOWS                        #
+####################################################
+
+  all_windows:
+    entities:
+      - binary_sensor.badfenster
+      - binary_sensor.esstischfenster
+      - binary_sensor.kuchenfenster
+      - binary_sensor.schlafzimmerfenster
+      - binary_sensor.kinderzimmerfenster
+      - binary_sensor.balkonfenster
       
 ####################################################
-#                   SWITCHES                       #
+#                KLEINE LAMPEN                     #
 ####################################################
 
-  Computer Shutdown & Restart:
-    control: hidden
+  kleine_lampen:
     entities:
-      - switch.schrank_switch
-      - switch.wachhold_switch
+      - light.besta
+      - light.kugel
 
-
-##############################################
+####################################################
 #                                                  #
 #           END OF CONFIGURATION FILE              #
 #                                                  #

@@ -6,15 +6,30 @@
 #                                                  #
 ####################################################
 
-switch.schrank_switch:
+switch.fritz_dect_200:
+  friendly_name: 'Fritz!Dect 200'
+  icon: mdi:power
+  
+switch.disher:
+  friendly_name: 'Geschirrspüler'
+  icon: mdi:power
+    
+switch.washer:
+  friendly_name: 'Waschmaschine'
+  icon: mdi:power
+  
+switch.dryer:
+  friendly_name: 'Wäschetrockner'
+  icon: mdi:power
+  
+switch.toaster:
+  friendly_name: 'Toaster'
+  icon: mdi:power
+  
+switch.schrank:
+  friendly_name: 'Schrank'
   icon: mdi:desktop-tower
 
-switch.my_smart_plug:
-  friendly_name: TP-Link Switch
-  icon: mdi:power
-
-switch.fritzdect_200:
-  icon: mdi:power
-
-switch.wachhold_switch:
+switch.wachhold:
+  friendly_name: 'Wachhold'
   icon: mdi:desktop-tower

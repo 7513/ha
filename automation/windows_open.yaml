@@ -1,0 +1,24 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                WINDOW OPEN/CLOSE                 #
+#                                                  #
+####################################################
+#https://community.home-assistant.io/t/notify-which-windows-are-left-open-when-you-leave-the-house/76372
+- alias: 'check_window_open'
+  trigger:
+    platform: state
+    entity_id: input_boolean.someone_home
+    to: 'off'
+  condition:
+    - condition: state
+      entity_id: group.all_windows
+      state: 'on'
+  action:
+    - service: notify.home_assistant
+      data_template:
+        title: "Fenster sind offen:"
+        message: >
+         {{ states | selectattr('entity_id','in', state_attr('group.all_windows','entity_id')) | selectattr('state','eq','on') | map(attribute='name') | join(', ') }}

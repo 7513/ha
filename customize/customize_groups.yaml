@@ -2,63 +2,98 @@
 
 ####################################################
 #                                                  #
-#                    GROUPS                        #
+#                     VIEWS                        #
 #                                                  #
 ####################################################
+group.rooms:
+  friendly_name: 'Räume'
 
+group.device_status:
+  friendly_name: 'Gerätestatus'
+
+group.ha:
+  friendly_name: 'Hassio Status'
+  
+group.automations:
+  friendly_name: 'Automationen'
+  
+group.switches:
+  friendly_name: 'Schalter'
+
+group.weather:
+  friendly_name: 'Wetter'
+  
+group.settings:
+  friendly_name: 'Einstellungen'
+  
+group.home_assistant:
+  friendly_name: 'Home Assistant'
+
+group.device_tracker:
+  friendly_name: 'Tracker'
+
+group.vacation_mode:
+  friendly_name: 'Urlaubsmodus'
+  
+group.other:
+  friendly_name: 'Andere'
+  
 group.location:
-  friendly_name: Standort
-  
+  friendly_name: 'Standort'
+
 group.living_room:
-  friendly_name: Wohnzimmer
-  
+  friendly_name: 'Wohnzimmer'
+
 group.children_room:
-  friendly_name: Kinderzimmer
+  friendly_name: 'Kinderzimmer'
 
 group.bathroom:
-  friendly_name: Bad
+  friendly_name: 'Bad'
 
 group.corridor:
-  friendly_name: Flur
+  friendly_name: 'Flur'
 
 group.bedroom:
-  friendly_name: Schlafzimmer
+  friendly_name: 'Schlafzimmer'
 
 group.kitchen:
-  friendly_name: Küche
+  friendly_name: 'Küche'
+
+group.fritzdect_switches:
+  friendly_name: 'Fritz!Dect'
+
+group.tplink_switches:
+  friendly_name: 'TP Link'
+  
+group.computer_shutdown_restart:
+  friendly_name: 'PC herunterfahren'
   
 group.devices:
-  friendly_name: Geräte
-
-group.computer_shutdown__restart:
-  friendly_name: PC herunterfahren
+  friendly_name: 'Geräte'
+  
+group.ha_monitor:
+  friendly_name: 'Monitor'
 
 group.network_performance:
-  friendly_name: Netzwerkleistung
-
-group.ha_server_monitor:
-  friendly_name: HA Server Übersicht
+  friendly_name: 'Netzwerk'
 
 group.batteries:
-  friendly_name: Batterien
+  friendly_name: 'Batterien'
 
-group.vacation_mode_automations:
-  friendly_name: Urlaubsmodus Automationen
-
-group.home_assistant_automations:
-  friendly_name: HA Automationen
-
-group.device_tracker_automations:
-  friendly_name: Geräte Tracker Automationen
-
-group.other_automations:
-  friendly_name: Andere Automationen
-
+group.octoprint:
+  friendly_name: 'Octoprint'
+  
 group.local_weather:
-  friendly_name: Wetter
+  friendly_name: 'Wetter'
 
 group.forecast4:
-  friendly_name: 4 Tage Vorhersage
+  friendly_name: '4 Tage Vorhersage'
+
+group.all_windows:
+  friendly_name: 'Alle Fenster'
+
+group.kleine_lampen:
+  friendly_name: 'Kleine Lampen'
 
 
 ####################################################

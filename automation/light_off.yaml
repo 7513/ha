@@ -1,32 +1,31 @@
-
 #https://www.home-assistant.io/components/automation
 
 ####################################################
 #                                                  #
-#                  ARRIVED HOME                    #
+#                  LIGHT OFF                       #
 #                                                  #
 ####################################################
 
-  - alias: 'kommt_nach_hause'
+  - alias: 'nachtlicht_aus'
     trigger:
-      - platform: state
-        entity_id: device_tracker.mi8_miphone
-        to: 'home'
+      - platform: sun
+        event: sunset
+        offset: '+01:00:00'
     action:
-#      - service: script.turn_on
-#        entity_id: script.timed_lamp
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.someone_home
-
-
-  - alias: 'verlasst_das_haus'
+      - service: homeassistant.turn_off
+        data:
+          entity_id: light.nachtlicht
+         
+  - alias: 'nachtlicht_an'
     trigger:
-      - platform: state
-        entity_id: device_tracker.mi8_miphone
-        to: 'not_home'
+      - platform: sun
+        event: sunset
+        offset: '-01:00:00'
     action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.someone_home
+      - service: homeassistant.turn_on
+        data:
+          entity_id: light.nachtlicht
+
 
 ####################################################
 #                                                  #

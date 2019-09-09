@@ -16,6 +16,10 @@
 # USERNAME is the Windows assigned username.  Got to C:\Users to find your username.  (windows may have truncated the name you provided)
 # PASSWORD is the password you use to log into windows
 
+
+#  ir_http: '/usr/bin/curl http://xxx/ir?code=7501'
+  ir_http: sh /home/pi/scripts/irsend.sh {{code}}
+
 ####################################################
 #                                                  #
 #          END OF CONFIGURATION FILE               #

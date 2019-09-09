@@ -1,0 +1,87 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#             DISH WASHER NOTIFY                   #
+#                                                  #
+####################################################
+
+  - alias: 'action_set_dish_washer_to_running'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dish_washer_watts
+        above: '5'
+        for:
+          minutes: 5
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: "Running"
+          
+  - alias: 'action_set_dish_washer_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dish_washer_watts
+        below: '0.1'
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.dish_washer_status
+          state: "Running"
+        - condition: state
+          entity_id: input_select.dish_washer_status
+          state: "Finished"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: "Powered Off"
+
+  - alias: 'action_set_dish_washer_as_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dish_washer_watts
+        below: '0.75'
+        for:
+          minutes: 10
+    condition:
+      - condition: state
+        entity_id: input_select.dish_washer_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: "Finished"
+
+  - alias: 'notify_dish_washer_finished'
+    trigger:
+      - platform: state
+        entity_id: input_select.dish_washer_status
+        to: "Finished"
+    action:
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.dish_washer_status
+#          option: "Powered Off"
+      - service: notify.home_assistant
+        data:
+          title: 'Der Geschirrspüler ist fertig.'
+          message: 'Leere mich!'
+#      - service: notify.home_assistant_ute
+#        data:
+#          title: 'Der Geschirrspüler ist fertig.'
+#          message: 'Sage deinem Mann Bescheid.'
+      - service: script.google_say
+        data:
+          message: 'Der Geschirrspüler ist fertig.'
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

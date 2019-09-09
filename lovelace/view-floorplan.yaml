@@ -1,0 +1,147 @@
+title: Floorplan
+id: floorplan
+path: floorplan
+icon: 'mdi:floor-plan'
+panel: true
+cards:
+  - type: 'custom:floorplan-card'
+    config:
+      image: /local/floorplan/floorplan.svg?v=1.1.14
+      stylesheet: /local/floorplan/floorplan.css?v=1.1.14
+#      log_level: error
+      rules:
+        - entities:
+            - light.besta
+            - light.stehlampe
+            - light.nachtlicht
+          states:
+            - state: 'on'
+              class: light-on
+            - state: 'off'
+              class: light-off
+            - state: unavailable
+              class: light-unavailable
+          propagate: true
+
+        - entities:
+            - sensor.kinderzimmer_temperature
+            - sensor.bad_temperature
+            - sensor.kuche_temperature
+          text_template: '${entity.state ? entity.state : "unknown"}°C'
+          class_template: '
+            var temp = parseFloat(entity.state);
+            if (temp < 5)
+              return "temp-freeze";
+            else if (temp < 15)
+              return "temp-low";
+            else if (temp < 25)
+              return "temp-medium";
+            else if (temp >= 25)
+              return "temp-high";
+            else
+              return "temp-unknown";
+            '
+          propagate: true
+        
+        - entities:
+            - sensor.home_temperature
+          text_template: '${entity.state ? entity.state : "unknown"}°C'
+          class_template: '
+            var temp = parseFloat(entity.state);
+            if (temp < 5)
+              return "temp-freeze";
+            else if (temp < 10)
+              return "temp-low";
+            else if (temp < 25)
+              return "temp-medium";
+            else if (temp >= 25)
+              return "temp-high";
+            else
+              return "temp-unknown";
+            '
+          propagate: true
+           
+        - entities:
+            - sensor.temp_aq_left
+            - sensor.temp_aq_right
+          text_template: '${entity.state ? entity.state : "unknown"}°C'
+          class_template: '
+            var temp = parseFloat(entity.state);
+            if (temp < 5)
+              return "temp-freeze";
+            else if (temp < 15)
+              return "temp-low";
+            else if (temp < 25)
+              return "temp-medium";
+            else if (temp >= 25)
+              return "temp-high";
+            else
+              return "temp-unknown";
+            '
+          propagate: true
+          
+        - entities:
+            - sensor.kuche_humidity
+            - sensor.kinderzimmer_humidity
+            - sensor.bad_humidity
+          text_template: '${entity.state ? entity.state : "unknown"}%'
+          class_template: '
+            var humid = parseFloat(entity.state);
+            if (humid < 30)
+              return "humid-low";
+            else if (humid < 45)
+              return "humid-med-low";
+            else if (humid < 60)
+              return "humid-medium";
+            else if (humid < 70)
+              return "humid-med-high";
+            else
+              return "humid-high";
+            '
+          propagate: true
+          
+        - entities:
+            - sensor.home_humidity
+          text_template: '${entity.state ? entity.state : "unknown"} %'
+          class_template: '
+            var humid = parseFloat(entity.state.replace("%", ""));
+            if (humid < 30)
+              return "humid-low";
+            else if (humid < 45)
+              return "humid-med-low";
+            else if (humid < 55)
+              return "humid-medium";
+            else if (humid < 65)
+              return "humid-med-high";
+            else
+              return "humid-high";
+            '
+          propagate: true
+          
+        - entities:
+            - binary_sensor.badfenster
+            - binary_sensor.kuchenfenster
+            - binary_sensor.schlafzimmerfenster
+            - binary_sensor.esstischfenster
+            - binary_sensor.balkonfenster
+            - binary_sensor.kinderzimmerfenster
+          states:
+            - state: 'off'
+              class: binary-sensor-off
+            - state: 'on'
+              class: binary-sensor-on
+          propagate: true
+          
+        - entities:
+            - input_select.dish_washer_status
+            - input_select.dryer_status
+            - input_select.washer_status
+          states:
+            - state: Powered Off
+              class: status-off
+            - state: Running
+              class: status-running
+            - state: Finished
+              class: status-finished
+          propagate: true
+

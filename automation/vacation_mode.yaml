@@ -3,12 +3,11 @@
 
 #########################################################
 #                                                       #
-#               TURN ON VACATION MODE                   #
+#           TURN ON/OFF VACATION MODE                   #
 #                                                       #
 #########################################################
 
-  - id: vacation_mode_turn_on
-    alias: 'Turn on Vacation Mode'
+  - alias: 'urlaubsmodus_ein'
     trigger:
       platform: state
       entity_id: input_boolean.vacation
@@ -17,18 +16,10 @@
     action:
       service: notify.home_assistant
       data:
-        title: 'Vaction Mode'
-        message: 'ON'
+        title: 'Urlaubsmodus'
+        message: 'EIN'
 
-
-#########################################################
-#                                                       #
-#               TURN OFF VACATION MODE                  #
-#                                                       #
-#########################################################
-
-  - id: vacation_mode_turn_off
-    alias: 'Turn off Vacation Mode'
+  - alias: 'urlaubsmodus_aus'
     trigger:
       platform: state
       entity_id: input_boolean.vacation
@@ -37,8 +28,8 @@
     action:
       service: notify.home_assistant
       data:
-        title: 'Vaction Mode'
-        message: 'OFF'
+        title: 'Urlaubsmodus:'
+        message: 'AUS'
 
 
 ####################################################

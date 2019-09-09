@@ -1,0 +1,74 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                 TOASTER NOTIFY                   #
+#                                                  #
+####################################################
+
+  - alias: 'action_set_toaster_to_running'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.toaster_watts
+        above: '1'
+#        for:
+#          seconds: 15
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.toaster_status
+          option: "Running"
+          
+  - alias: 'action_set_toaster_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.toaster_watts
+        below: '0.0'
+    condition:
+      - condition: state
+        entity_id: input_select.toaster_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.toaster_status
+          option: "Powered Off"
+
+  - alias: 'action_set_toaster_as_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.toaster_watts
+        below: '0.5'
+#        for:
+#          seconds: 2
+    condition:
+      - condition: state
+        entity_id: input_select.toaster_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.toaster_status
+          option: "Finished"
+
+  - alias: 'notify_toaster_finished'
+    trigger:
+      - platform: state
+        entity_id: input_select.toaster_status
+        to: "Finished"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.toaster_status
+          option: "Powered Off"
+      - service: script.google_say
+        data:
+          message: 'Der Toast ist fertig.'
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

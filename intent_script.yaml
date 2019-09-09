@@ -1,16 +1,46 @@
-  HassTurnOff:
+#  HassTurnOff:
+#    speech:
+#      type: plain
+#      text: 'OK, schalte {{ name }} aus.'
+#    action:
+#      service: light.turn_off
+#      data_template:
+#        entity_id: light.{{ name }}
+#  HassTurnOn:
+#    speech:
+#      type: plain
+#      text: 'OK, schalte {{ name }} ein.'
+#    action:
+#      service: light.turn_on
+#      data_template:
+#        entity_id: light.{{ name }}
+
+  SetTimer:
     speech:
       type: plain
-      text: 'OK, schalte {{ name }} aus.'
+      text: 'Set a timer'
     action:
-      service: light.turn_off
+      service: script.set_timer
       data_template:
-        entity_id: light.{{ name }}
-  HassTurnOn:
+        name: "{{ timer_name }}"
+        duration: "{{ timer_duration }}"
+        siteId: "{{ site_id }}"
+        sessionId: "{{ session_id }}"
+        duration_raw: "{{ raw_value }}"
+        probability: "{{ probability }}"
+        
+  turn_on_light:
     speech:
       type: plain
-      text: 'OK, schalte {{ name }} ein.'
+      text: 'OK, turning on the light'
     action:
       service: light.turn_on
-      data_template:
-        entity_id: light.{{ name }}
+      entity_id: light.stehlampe
+      
+  turn_off_light:
+    speech:
+      type: plain
+      text: 'OK, turning off the light'
+    action:
+      service: light.turn_off
+      entity_id: light.stehlampe

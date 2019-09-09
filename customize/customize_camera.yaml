@@ -2,18 +2,18 @@
 
 ####################################################
 #                                                  #
-#                   CLIMATE                        #
+#                     CAMERA                       #
 #                                                  #
 ####################################################
 
-climate.hk_bad:
-  friendly_name: 'Bad'
+camera.octoprint_camera:
+  friendly_name: 'Octoprint Kamera'
+  
+camera.niederschlagsradar:
+  friendly_name: 'Niederschlagsradar'
+  icon: mdi:weather-rainly
 
-climate.hk_fenster:
-  friendly_name: 'Fenster'
 
-climate.hk_balkon:
-  friendly_name: 'Balkon'
 
 ####################################################
 #                                                  #

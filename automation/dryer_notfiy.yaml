@@ -1,0 +1,82 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                   DRYER NOTIFY                   #
+#                                                  #
+####################################################
+
+  - alias: 'action_set_dryer_to_running'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dryer_watts
+        above: '5'
+        for:
+          minutes: 5
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: "Running"
+          
+  - alias: 'action_set_dryer_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dryer_watts
+        below: '0.1'
+    condition:
+      - condition: state
+        entity_id: input_select.dryer_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: "Powered Off"
+
+  - alias: 'action_set_dryer_as_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dryer_watts
+        below: '0.75'
+        for:
+          minutes: 8
+    condition:
+      - condition: state
+        entity_id: input_select.dryer_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: "Finished"
+
+  - alias: 'notify_dryer_finished'
+    trigger:
+      - platform: state
+        entity_id: input_select.dryer_status
+        to: "Finished"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: "Powered Off"
+      - service: notify.home_assistant
+        data:
+          title: 'Der Trockner ist fertig.'
+          message: 'Leere mich!'
+#      - service: notify.home_assistant_ute
+#        data:
+#          title: 'Der Trockner ist fertig.'
+#          message: 'Sage deinem Mann Bescheid.'
+      - service: script.google_say
+        data:
+          message: 'Der Trockner ist fertig.'
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -18,8 +18,35 @@
       - "Indigo"
       - "Violet"
       - "Purple"
-    icon: mdi:lightbulb
     initial: White
+
+  dish_washer_status:
+    options:
+     - 'Powered Off'
+     - 'Running'
+     - 'Finished'
+    initial: 'Powered Off'
+    
+  washer_status:
+    options:
+     - 'Powered Off'
+     - 'Running'
+     - 'Finished'
+    initial: 'Powered Off'
+    
+  dryer_status:
+    options:
+     - 'Powered Off'
+     - 'Running'
+     - 'Finished'
+    initial: 'Powered Off'
+    
+  toaster_status:
+    options:
+     - 'Powered Off'
+     - 'Running'
+     - 'Finished'
+    initial: 'Powered Off'
 
 ####################################################
 #                                                  #

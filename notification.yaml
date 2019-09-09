@@ -8,7 +8,7 @@
 ####################################################
 
 #https://home-assistant.io/components/notify.smtp/
-  - name: Home_Assistant
+  - name: 'home_assistant'
     platform: smtp
     server: smtp.gmail.com
     port: 587
@@ -20,7 +20,7 @@
     recipient: !secret notification_recipient
     sender_name: My Home Assistant
 
-  - name: Home_Assistant_Ute
+  - name: 'home_assistant_ute'
     platform: smtp
     server: smtp.gmail.com
     port: 587
@@ -30,7 +30,24 @@
     username: !secret notification_username
     password: !secret notification_password
     recipient: !secret ute_notification_recipient
-    sender_name: My Home Assistant
+    sender_name: My Home Assistan
+
+#https://www.home-assistant.io/components/notify.lannouncer/
+  - name: 'pixelc_say'
+    platform: lannouncer
+    host: !secret pixelc_ip
+    
+  - name: 'galaxynexus_say'
+    platform: lannouncer
+    host: !secret galaxynexus_ip
+    
+#  - name: 'wohnzimmer_fenster_offen'
+#    platform: group
+#    services:
+#      - service: notify_google_say
+#        data:
+#          message: 'Das Wohnzimmerfenster ist offen.'
+
 
 ####################################################
 #                                                  #

@@ -1,0 +1,24 @@
+    #https://github.com/pkozul/lovelace-floorplan
+  - type: module
+    url: /local/floorplan/floorplan-card.js?v=1.1.14
+    #https://github.com/kalkih/mini-graph-card
+  - type: module
+    url: /local/mini-graph-card-bundle.js?v=0.6.0
+  - type: js
+    #https://github.com/thomasloven/lovelace-card-tools
+    url: /local/card-tools.js?v=0.4
+    #https://github.com/MizterB/lovelace-secondaryinfo-entity-row
+  - type: module
+    url: /local/secondaryinfo-entity-row.js
+  #https://github.com/custom-cards/vertical-stack-in-card
+  - type: js
+    url: /local/vertical-stack-in-card.js?v=v0.1.3
+  #https://github.com/thomasloven/lovelace-card-mod
+  - type: module
+    url: /local/card-mod.js?v=1
+  #https://github.com/custom-cards/button-card
+  - type: module
+    url: /local/button-card.js
+  #https://github.com/maykar/compact-custom-header
+  - type: module
+    url: /local/compact-custom-header.js?v=1.3.6

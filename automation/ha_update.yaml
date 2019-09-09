@@ -7,16 +7,16 @@
 #                                                  #
 ####################################################
 
-  - id: ha_update_notification
-    alias: 'HA update notification'
+  - alias: 'ha_update_notify'
     trigger:
       - platform: state
-        entity_id: updater.updater
+        entity_id: binary_sensor.updater
+        to: 'on'
     action:
       service: notify.home_assistant
       data:
-        title: 'New Home Assistant Release'
-        message: 'There is a new Home Assistant release available.'
+        title: "New Home Assistant Release"
+        message: "There is a new Home Assistant release {{ state_attr('binary_sensor.updater', 'newest_version') }} available."
 
 
 ####################################################

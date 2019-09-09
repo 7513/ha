@@ -1,0 +1,231 @@
+title: Räume
+id: rooms
+path: default_view
+icon: 'mdi:home'
+cards:
+  - type: entities
+    title: Standort
+    show_header_toggle: false
+#    style: |
+#      ha-card {
+#      color: red;
+#      }
+    entities:
+      - device_tracker.mi8_miphone
+      - device_tracker.pocophonef1pocophon
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: entities
+        title: Wohnzimmer
+        show_header_toggle: false
+        entities:
+          - binary_sensor.esstischfenster
+          - binary_sensor.balkonfenster
+          - light.wohnzimmer
+          - light.esstisch
+          - light.besta
+          - light.kugel
+#          - sensor.temp_aq_left
+#          - sensor.temp_aq_right
+#      - type: custom:button-card
+#        entity: light.wohnzimmer
+#        icon: mdi:sofa
+#        color: auto
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Aquarium links
+            hours_to_show: 24
+            graph: line
+            detail: 1
+            style: |
+              ha-card {
+                margin-right: 3px;
+              }
+            entities:
+              - sensor.temp_aq_left
+          - type: custom:mini-graph-card
+            name: Aquarium rechts
+            hours_to_show: 24
+            graph: line
+            detail: 1
+            style: |
+              ha-card {
+                margin-left: 3px;
+              }
+            entities:
+              - sensor.temp_aq_right
+      - type: thermostat
+        entity: climate.hk_balkon
+      - type: thermostat
+        entity: climate.hk_fenster
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: entities
+        title: Kinderzimmer
+        show_header_toggle: false
+        entities:
+          - light.kinderzimmer
+          - light.nachtlicht
+          - binary_sensor.kinderzimmerfenster
+#          - sensor.kinderzimmer_temperature
+#          - sensor.kinderzimmer_humidity
+#          - sensor.kinderzimmer_pressure
+          - sensor.nachtlicht_fb
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Kinderzimmer
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-right: 3px;
+              }
+            entities:
+              - sensor.kinderzimmer_temperature
+          - type: custom:mini-graph-card
+            name: Kinderzimmer
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-left: 3px;
+              }
+            entities:
+              - sensor.kinderzimmer_humidity
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: entities
+        title: Bad
+        show_header_toggle: false
+        entities:
+          - binary_sensor.badfenster
+#          - sensor.bad_temperature
+#          - sensor.bad_humidity
+#          - sensor.bad_pressure
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Bad
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-right: 3px;
+              }
+            entities:
+              - sensor.bad_temperature
+          - type: custom:mini-graph-card
+            name: Bad
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-left: 3px;
+              }
+            entities:
+              - sensor.bad_humidity
+      - type: thermostat
+        entity: climate.hk_bad
+  - type: entities
+    title: Flur
+    show_header_toggle: false
+    entities:
+      - light.flur
+#      - sensor.wandsender_2_fach_battery_level
+  - type: entities
+    title: Schlafzimmer
+    show_header_toggle: false
+    entities:
+      - binary_sensor.schlafzimmerfenster
+      - light.stehlampe
+#      - sensor.benachrichtigung_fb
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: entities
+        title: Küche
+        show_header_toggle: false
+        entities:
+          - binary_sensor.kuchenfenster
+#          - sensor.kuche_temperature
+#          - sensor.kuche_humidity
+#          - sensor.kuche_pressure
+#          - sensor.dish_washer_amps
+#          - sensor.dish_washer_volts
+#          - sensor.dish_washer_watts
+#          - sensor.dish_washer_total_kw
+#          - sensor.washer_amps
+#          - sensor.washer_volts
+#          - sensor.washer_watts
+#          - sensor.washer_total_kw
+#          - sensor.dryer_amps
+#          - sensor.dryer_volts
+#          - sensor.dryer_watts
+#          - sensor.dryer_total_kw
+#          - sensor.toaster_amps
+#          - sensor.toaster_volts
+#          - sensor.toaster_watts
+#          - sensor.toaster_total_kw
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Küche
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-right: 3px;
+              }
+            entities:
+              - sensor.kuche_temperature
+          - type: custom:mini-graph-card
+            name: Küche
+            hours_to_show: 24
+            points_per_hour: 0.25
+            style: |
+              ha-card {
+                margin-left: 3px;
+              }
+            entities:
+              - sensor.kuche_humidity
+      - type: custom:mini-graph-card
+        name: Geschirrspüler
+        hours_to_show: 24
+        points_per_hour: 0.25
+        entities:
+          - sensor.dish_washer_watts
+      - type: custom:mini-graph-card
+        name: Waschmaschine
+        hours_to_show: 24
+        points_per_hour: 0.25
+        entities:
+          - sensor.washer_watts
+      - type: custom:mini-graph-card
+        name: Wäschetrockner
+        hours_to_show: 24
+        points_per_hour: 0.25
+        entities:
+          - sensor.dryer_watts
+      - type: custom:mini-graph-card
+        name: Toaster
+        hours_to_show: 24
+        points_per_hour: 0.25
+        entities:
+          - sensor.toaster_watts
+  - type: entities
+    title: Alle Fenster
+    show_header_toggle: false
+    entities:
+      - binary_sensor.badfenster
+      - binary_sensor.esstischfenster
+      - binary_sensor.kuchenfenster
+      - binary_sensor.schlafzimmerfenster
+      - binary_sensor.kinderzimmerfenster
+      - binary_sensor.balkonfenster
+  - type: entities
+    title: Kleine Lampen
+    show_header_toggle: false
+    entities:
+      - light.besta
+      - light.kugel

@@ -1,0 +1,82 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                  WASHER NOTIFY                   #
+#                                                  #
+####################################################
+
+  - alias: 'action_set_washer_to_running'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washer_watts
+        above: '3'
+        for:
+          minutes: 2
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_status
+          option: "Running"
+          
+  - alias: 'action_set_washer_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washer_watts
+        below: '0.1'
+    condition:
+      - condition: state
+        entity_id: input_select.washer_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_status
+          option: "Powered Off"
+
+  - alias: 'action_set_washer_as_finished'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washer_watts
+        below: '3'
+        for:
+          minutes: 2
+    condition:
+      - condition: state
+        entity_id: input_select.washer_status
+        state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_status
+          option: "Finished"
+
+  - alias: 'notify_washer_finished'
+    trigger:
+      - platform: state
+        entity_id: input_select.washer_status
+        to: "Finished"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_status
+          option: "Powered Off"
+      - service: notify.home_assistant
+        data:
+          title: 'Die Waschmaschine ist fertig.'
+          message: 'Leere mich!'
+#      - service: notify.home_assistant_ute
+#        data:
+#          title: 'Die Waschmaschine ist fertig.'
+#          message: 'Sage deinem Mann Bescheid.'
+      - service: script.google_say
+        data:
+          message: 'Die Waschmaschine ist fertig.'
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

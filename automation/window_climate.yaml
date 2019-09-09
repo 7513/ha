@@ -1,0 +1,58 @@
+
+#https://www.home-assistant.io/components/automation
+
+####################################################
+#                                                  #
+#                 WINDOW IS OPEN                   #
+#                                                  #
+####################################################
+
+  - alias: 'Ein Fenster ist offen'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.esstischfenster
+        to: 'on'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.balkonfenster
+        to: 'on'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.badfenster
+        to: 'on'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.kuchenfenster
+        to: 'on'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.schlafzimmerfenster
+        to: 'on'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.kinderzimmerfenster
+        to: 'on'
+        for: 
+          minutes: 5
+    action:
+      - service: script.google_say
+        data_template:
+          message: "Das {{ state_attr(trigger.entity_id , 'friendly_name') }} ist offen."
+#    action:
+#      - service: script.reminder_window_open
+#        data_template:
+#          window: "{{ trigger.entity_id }}"
+
+
+
+        
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

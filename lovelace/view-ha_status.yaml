@@ -1,0 +1,26 @@
+title: Hassio Status
+id: ha
+path: ha
+icon: 'mdi:home-assistant'
+badges:
+  - binary_sensor.updater
+cards:
+  - type: entities
+    title: Monitor
+    show_header_toggle: false
+    entities:
+      - sensor.processor_use
+      - sensor.cpu_temperature
+      - sensor.disk_use_percent_home
+      - sensor.memory_use_percent
+      - sensor.last_boot
+      - sensor.since_last_boot_templated
+      - sensor.ha_uptime
+      - sensor.network_in_eth0
+      - sensor.network_out_eth0
+  - type: entities
+    title: Batterien
+    show_header_toggle: false
+    entities:
+      - sensor.nachtlicht_fb
+      - sensor.benachrichtigung_fb

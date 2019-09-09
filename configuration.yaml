@@ -44,7 +44,7 @@ config:
 #https://www.home-assistant.io/components/frontend/
 # Enables the frontend
 frontend:
-  javascript_version: latest
+  javascript_version: es5
 
 #https://home-assistant.io/components/http/
 http:
@@ -60,7 +60,13 @@ recorder:
 
 #https://home-assistant.io/components/logger/
 logger:
-  default: error
+  default: info
+#  logs:
+#    pydeconz: debug
+#   default: critical
+#   logs:
+#     homeassistant.components.deconz: debug
+#     pydeconz: debug
 
 #https://www.home-assistant.io/components/updater
 # Checks for available updates
@@ -93,15 +99,13 @@ hassio:
 #https://www.home-assistant.io/components/tts
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
   
 #https://www.home-assistant.io/components/snips/
-snips:
-  feedback_sounds: true
-  probability_threshold: 0.6
-
-
-#intent_script: !include intent_script.yaml
+#snips:
+#  feedback_sounds: false
+#  probability_threshold: 0.6
 
 
 #https://www.home-assistant.io/docs/mqtt/broker/
@@ -109,6 +113,28 @@ snips:
 mqtt:
   broker: localhost
   port: 1883
+  username: mqtt_user
+  password: !secret http_password
+
+#https://www.home-assistant.io/components/owntracks
+# owntracks
+owntracks:
+  max_gps_accuracy: 100
+  waypoints: true
+  waypoint_whitelist:
+    - 7513
+
+# speedtestdotnet
+speedtestdotnet:
+
+#https://www.home-assistant.io/components/octoprint/
+# octoprint
+octoprint:
+  name: anycubic
+  host: !secret octoprint_ip
+  api_key: !secret octoprint_key
+  bed: true
+  number_of_tools: 1
 
 ####################################################
 #                                                  #
@@ -129,6 +155,8 @@ notify: !include notification.yaml
 input_boolean: !include input_boolean.yaml
 input_select: !include input_select.yaml
 automation: !include_dir_merge_list automation/
+#alert: !include alert.yaml
+intent_script: !include intent_script.yaml
 
 ####################################################
 #                                                  #
@@ -148,15 +176,9 @@ fritzbox:
 #                   MEDIA PLAYER                   #
 #                                                  #
 ####################################################
-
-#https://www.home-assistant.io/components/media_player
-#media_player:
-#  - platform: panasonic_viera
-#    host: 192.168.75.27
-
-#media_player:
-#  - platform: mpd
-#    host: localhost
+media_player:
+  - platform: mpd
+    host: !secret mopidy_url
 
 
 
@@ -167,9 +189,9 @@ fritzbox:
 ####################################################
 
 #https://home-assistant.io/components/tradfri/
-tradfri:
-  host: !secret tradfri_ip
-  allow_tradfri_groups: false
+#tradfri:
+#  host: !secret tradfri_ip
+#  allow_tradfri_groups: false
 
   
 ####################################################
@@ -199,6 +221,39 @@ input_text:
     name: Ute Brief Input
     initial: Guten Morgen, mein Schatz :*
 
+#https://www.home-assistant.io/components/panel_iframe/
+panel_iframe:
+#  grafana:
+#    title: 'Grafana'
+#    icon: mdi:chart-timeline
+#    url: !secret grafana_url
+  mopidy:
+    title: 'Mopidy'
+    icon: mdi:music
+    url: !secret mopidy_url
+    
+#panel_custom:
+#  - name: floorplan
+#    sidebar_title: 'Floorplan'
+#    sidebar_icon: mdi:floor-plan
+#    url_path: floorplan 
+    
+  
+
+    
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: hassio
+  username: 7513
+  password: !secret http_password
+  max_retries: 3
+  default_measurement: state
+  
+system_health:
+
+lovelace:
+  mode: yaml
 
 ####################################################
 #                                                  #

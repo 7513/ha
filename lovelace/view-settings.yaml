@@ -1,0 +1,39 @@
+title: Einstellungen
+id: settings
+path: settings
+icon: 'mdi:skull'
+cards:
+  - type: entities
+    title: Texteingabe
+    entities:
+      - input_text.utebriefinput
+  - type: entities
+    title: Boolsche Eingabe
+    entities:
+      - input_boolean.washer_running
+      - input_boolean.dryer_finished
+      - input_boolean.dryer_running
+      - input_boolean.toaster_finished
+      - input_boolean.dish_washer_finished
+      - input_boolean.toaster_running
+      - input_boolean.someone_home
+      - input_boolean.dish_washer_running
+      - input_boolean.washer_finished
+  - type: entities
+    title: Auswahlfeld
+    entities:
+      - input_select.toaster_status
+      - input_select.notification_bulb2_color
+      - input_select.dish_washer_status
+      - input_select.washer_status
+      - input_select.dryer_status
+  - type: entities
+    title: Skript
+    entities:
+      - script.timer_off
+      - script.reminder_window_open
+      - script.delay_window_open
+      - script.google_say
+      - script.normallight
+      - script.returntonormal
+      - script.timed_lamp

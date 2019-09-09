@@ -1,0 +1,94 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+
+####################################################
+#                                                  #
+#             BINARY SENSORS                       #
+#                                                  #
+####################################################
+
+
+binary_sensor.schrank:
+  friendly_name: 'Schrank'
+  icon: mdi:desktop-tower
+
+binary_sensor.wachhold:
+  friendly_name: 'Wachhold'
+  icon: mdi:desktop-tower
+
+binary_sensor.geschirrspueler:
+  friendly_name: 'Geschirrspüler'
+  icon: mdi:dishwasher
+  
+binary_sensor.trockner:
+  friendly_name: 'Wäschetrockner'
+  icon: mdi:tumble-dryer
+  
+binary_sensor.waschmaschine:
+  friendly_name: 'Waschmaschine'
+  icon: mdi:washing-machine
+  
+binary_sensor.toaster:
+  friendly_name: 'Toaster'
+  icon: mdi:toaster-oven
+
+binary_sensor.ikea_gateway:
+  friendly_name: 'Ikea Gateway'
+  icon: mdi:access-point-network
+
+binary_sensor.chromecast:
+  friendly_name: 'Chromecast'
+  icon: mdi:google-chrome
+
+binary_sensor.tv:
+  friendly_name: 'Fernseher'
+  icon: mdi:television-classic
+
+binary_sensor.fire_tv_stick:
+  friendly_name: 'Fire TV Stick'
+  icon: mdi:amazon-alexa
+  
+binary_sensor.ir_devices:
+  friendly_name: 'IR Webcontrol'
+  icon: mdi:remote
+  
+binary_sensor.galaxynexus:
+  friendly_name: 'Nexus Wecker'
+  icon: mdi:clock
+  
+binary_sensor.octoprint:
+  friendly_name: 'Octoprint'
+  icon: mdi:printer-3d
+  
+binary_sensor.pihole:
+  friendly_name: 'Das Pi Hole'
+  icon: mdi:pi-hole
+  
+binary_sensor.hp:
+  friendly_name: 'Notebook'
+  icon: mdi:laptop
+  
+binary_sensor.snips_sat_flur:
+  friendly_name: 'Snips Satellit'
+  icon: mdi:voice
+  
+binary_sensor.snips:
+  friendly_name: 'Musikserver'
+  icon: mdi:music
+  
+binary_sensor.pixel_c:
+  friendly_name: 'Tablet'
+  icon: mdi:tablet-android
+  
+binary_sensor.anycubic_printing:
+  friendly_name: 'Drucken'
+  icon: mdi:printer-3d-nozzle
+  
+binary_sensor.anycubic_printing_error:
+  friendly_name: 'Druckfehler'
+  icon: mdi:alert-circle
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

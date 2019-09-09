@@ -11,6 +11,19 @@
   - platform: fritz
     host: !secret fritz_ip
     track_new_devices: no
+    interval_seconds: 30
+
+#  - platform: ping
+#    hosts:
+#      schrank: !secret schrank_ip
+#      wachhold: !secret wachhold_ip
+#      geschirrspueler: !secret hs110_ip
+#      ikea_gateway: !secret tradfri_ip
+#      zero_camera: !secret zero_cam_ip
+#      chromecast: !secret chromecast_ip
+#      tv: !secret tv_ip
+#      fire_tv_stick: !secret firetv_ip
+#    count: 2
 
 
 ####################################################

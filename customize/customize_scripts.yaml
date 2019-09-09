@@ -1,0 +1,22 @@
+#https://home-assistant.io/docs/configuration/customizing-devices/
+####################################################
+#                                                  #
+#                    SCRIPTS                       #
+#                                                  #
+####################################################
+
+script.timed_lamp:
+  friendly_name: 'Lampe an : Timer an'
+
+script.timer_off:
+  friendly_name: 'Lampe aus nach 2 Min.'
+  
+script.reminder_window_open:
+  friendly_name: 'Erinnerung: Fenster offen'
+        
+script.delay_window_open:
+  friendly_name: 'Verzögerung: Fenster offen'
+
+script.google_say:
+  friendly_name: 'Google sagt etwas'
+  

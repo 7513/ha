@@ -1,0 +1,21 @@
+
+#https://www.home-assistant.io/components/alert
+
+####################################################
+#                                                  #
+#                      ALERT                       #
+#                                                  #
+####################################################
+
+#  esstisch_fenster_open:
+#    name: 'esstisch_fenster_is_open'
+#    entity_id: binary_sensor.esstischfenster
+#    can_acknowledge: true
+#    skip_first: true
+#    repeat:
+#      - 2
+#      - 1
+#    message: 'Plant needs help'
+#    done_message: 'Plant in office is fine'
+#    notifiers: 
+#      - wohnzimmer_fenster_offen

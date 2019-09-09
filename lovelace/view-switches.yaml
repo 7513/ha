@@ -1,0 +1,29 @@
+title: Schalter
+id: switches
+path: switches
+icon: 'mdi:toggle-switch'
+cards:
+  - type: entities
+    title: Fritz!Dect
+    show_header_toggle: false
+    entities:
+      - switch.fritz_dect_200
+  - type: entities
+    title: TP Link
+    show_header_toggle: false
+    entities:
+      - switch.washer
+      - switch.disher
+      - switch.dryer
+      - switch.toaster
+  - type: entities
+    title: Schalter
+    entities:
+      - switch.tv
+      - switch.stereoanlage
+      - switch.raptor
+  - type: entities
+    title: Urlaubsmodus
+    show_header_toggle: false
+    entities:
+      - input_boolean.vacation
